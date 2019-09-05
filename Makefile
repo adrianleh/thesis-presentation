@@ -6,7 +6,7 @@ default: $(BASE).pdf
 
 $(BUILD)/$(BASE).pdf: $(BASE).tex $(DEPS)
 	mkdir -p $(BUILD)
-	TEXINPUTS=style:$(TEXINPUTS) latexmk -f -pdf -outdir=build $<
+	TEXINPUTS=style:$(TEXINPUTS) latexmk -f -xelatex -shell-escape -outdir=build $<
 
 $(BASE).pdf: $(BUILD)/$(BASE).pdf
 	mv $< $@ # atomic update
