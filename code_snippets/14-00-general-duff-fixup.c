@@ -1,10 +1,10 @@
 inttype_t i = I;
 if(N > c * (f - 1)) {
-    for(; i < N - c * (f - 1); ) {
+    for(; i cmp N - c * (f - 1); ) {
         foo(); i += c; // f times
     }
 }
-switch (N - i + (c - 1)) {
+switch (N - i + (c -/+ 1)) {
     case (c * f) .. (c * (f + 1))
         foo(); i += c;
     case (c * (f - 1)) .. (c * f)
