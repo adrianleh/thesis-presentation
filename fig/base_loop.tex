@@ -1,0 +1,15 @@
+\begin{tikzpicture}[->,>=stealth',square/.style={regular polygon,regular polygon sides=4}]
+    \node at (0, 0.25) (pre) {$\top$};
+    \node at (0, -1) [square, draw] (H) {H};
+    \node at (1, -2) [square, draw] (B) {B};
+    \node at (0, -2.5) (post) {$\bot$};
+    \node at (1.5, 0.5) (poi0) {};
+    \node at (1.5, -2.5) (poi1) {};
+    \path[every node/.style={font=\sffamily\small}]
+    (H) edge node [right] {} (pre)
+    (post) edge node [right] {} (H)
+    (B) edge node [right] {} (H);
+
+    \draw[rounded corners=3pt, <-] (B.south) -- (1,-2.75) -- (1.75,-2.75) -- (1.75,-0.25) -- (0, -0.25) -- (H.north);
+
+\end{tikzpicture}
