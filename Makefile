@@ -19,3 +19,4 @@ show: $(BASE).pdf
 
 clean:
 	rm -rf build
+	rm -rf _minted-present
