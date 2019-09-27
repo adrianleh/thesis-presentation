@@ -35,7 +35,7 @@
 \newcommand<>*{\nodealert}[1]{\only#2{\draw[overlay,mythick,color=green!80!black] (#1.north west) rectangle (#1.south east)}}
 
 \title{Schleifenausrollen mit nicht konstanten Grenzen in FIRM}
-\author{Adrian E. Lehmannn}
+\author{Adrian E. Lehmann}
 \subtitle{\insertauthor}
 \institute[IPD]{Lehrstuhl Programmierparadigmen, IPD Snelting}
 \date{04.10.2019}
@@ -105,7 +105,7 @@
   $\hookrightarrow$ \texttt{length} $\in \{\only<3>{\color{green}} 1, 2,\only<2->{\color{green}} 3, \normalcolor 4,\only<2->{\color{green}} 5, 6\normalcolor \}$
 \end{frame}
 
-\begin{frame}{Nicht konstante Grenze: Duff's device}
+\begin{frame}{Nicht konstante Grenze: Duff's Device}
   \begin{center}
     \inputminted{c}{code_snippets/04-01-non-const-bound-duff-fixup.c}
   \end{center}
@@ -117,8 +117,8 @@
     \inputminted{c}{code_snippets/10-00-general-loop.c}
   \end{center}
   \begin{itemize}
-    \item $f$ unroll factor
-    \item $N$ loop invariant
+    \item $f$ Ausrollfaktor
+    \item $N$ Scheilfen invariant
     \item $c \in \lbrack \frac{t_{min}}{f + 1}, \frac{t_{max}}{f + 1} \rbrack$
     \item $cmp \in \{<,\leq,>,\geq\}$
   \end{itemize}
@@ -141,20 +141,20 @@
   \end{center}
 \end{frame}
 
-\begin{frame}{Allgmeiner loop fixup}
+\begin{frame}{Allgmeiner Loop fixup}
   \begin{center}
     \inputminted{c}{code_snippets/13-00-general-loop-fixup-preheader.c}
   \end{center}
   $c \in \lbrack \frac{t_{min}}{f + 1}, \frac{t_{max}}{f + 1} \rbrack$\\
 \end{frame}
 
-\begin{frame}{Allgemeiner loop fixup in FIRM}
+\begin{frame}{Allgemeiner Loop fixup in FIRM}
   \begin{center}
     \input{fig/loop_fixup.tex}
   \end{center}
 \end{frame}
 
-\begin{frame}{Allgemeineer duff fixup}
+\begin{frame}{Allgemeiner Duff's Device fixup}
   \begin{center}
     \inputminted{c}{code_snippets/14-00-general-duff-fixup.c}
   \end{center}
@@ -163,7 +163,7 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Allgemeiner Duff's device fixup in FIRM}
+\begin{frame}{Allgemeiner Duff's Device fixup in FIRM}
   \begin{center}
     \input{fig/duff_fixup.tex}
   \end{center}
@@ -174,11 +174,11 @@
    % Maximum size & 32 & 64  & 128 & 256 & 512 & 1024\\
     %\toprule
     %\textbf{Loop fixup} & 99.44\% & 99.47\% & 100.00\% & 100.32\% & 99.99\% & 100.24\%\\
-    %\textbf{Duff's device fixup} & 99.79\% & 100.12\% & 100.27\% & 99.53\% & 99.47\% & 100.35\%\\
+    %\textbf{Duff's Device fixup} & 99.79\% & 100.12\% & 100.27\% & 99.53\% & 99.47\% & 100.35\%\\
   %\end{tabular}
   \begin{center}
     \begin{tabular}{l|rr}
-      Maximum size & Loop fixup & Duff's device fixup\\
+      Maximum size & Loop fixup & Duff's Device fixup\\
       \toprule
       32 & 99.44\% & 99.79\% \\
       64 & 99.47\% & 100.12\% \\
@@ -213,8 +213,8 @@
     \item Grenze invariant, Inkrement konstant
     \item Spekulativ ausrollen
     \item Weniger oder gleich viele Ausführungen
-    \item Fixup code entweder loop oder duff's
-    \item Preheader für Randfälle
+    \item Fixup code entweder Loop oder Duff's Device
+    \item Preheader für Overflows
   \end{itemize}
 \end{frame}
 \end{document}

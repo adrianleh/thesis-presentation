@@ -8,10 +8,7 @@ if(!overflows(length - (4 - 1))) {
     }
 }
 switch (length - i) {
-   case 3:
-       doSth(items[i]); i++;
-   case 2:
-       doSth(items[i]); i++;
-   case 1:
-       doSth(items[i]); i++;
+   case 3: doSth(items[i]); i++;
+   case 2: doSth(items[i]); i++;
+   case 1: doSth(items[i]); i++;
 }
