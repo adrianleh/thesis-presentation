@@ -38,7 +38,7 @@
 \author{Adrian E. Lehmannn}
 \subtitle{\insertauthor}
 \institute[IPD]{Lehrstuhl Programmierparadigmen, IPD Snelting}
-\date{32.13.2019}
+\date{04.10.2019}
 \KITtitleimage{Cover.jpeg}
 
 \begin{document}
@@ -62,6 +62,11 @@
 \begin{frame}{Ausrollen: Nicht konstante Grenze}
   \begin{center}
     \inputminted{c}{code_snippets/02-00-non-const-bound.c}
+    \only<2>{
+      \includegraphics[width=0.5\textwidth]{fig/xkcd_random_number.png}\\
+      \texttt{https://xkcd.com/221/}
+    }
+    \only<3>{\texttt{fairDiceRoll()} $\in \lbrack 1, 6 \rbrack$ (random)}
   \end{center}
 \end{frame}
 
@@ -69,14 +74,14 @@
   \begin{center}
     \inputminted{c}{code_snippets/02-01-non-const-bound-unrolled.c}
   \end{center}
-  $\hookrightarrow$ \texttt{length} $\in \{\only<2>{\color{red}} 1, 2, 3, \normalcolor 4,\only<2>{\color{red}} 5, 6\normalcolor \}$
+  $\hookrightarrow$ \texttt{length} $\in \{\only<2->{\color{red}} 1, \only<2>{\normalcolor} 2, \only<2-3>{\normalcolor} 3, \only<4->{\normalcolor} 4,\only<5-6>{\color{red}} 5, \only<5>{\normalcolor} 6\normalcolor \}$
 \end{frame}
 
 \begin{frame}{Ausrollen: Nicht konstante Grenze}
   \begin{center}
     \inputminted{c}{code_snippets/03-00-non-const-bound-unrolled-less.c}
   \end{center}
-  $\hookrightarrow$ \texttt{length} $\in \{\only<2>{\color{orange}} 1, 2, 3, \normalcolor 4,\only<2>{\color{orange}} 5, 6\normalcolor \}$
+  $\hookrightarrow$ \texttt{length} $\in \{\only<2->{\color{orange}} 1, \only<2>{\normalcolor} 2, \only<2-3>{\normalcolor} 3, \only<4->{\normalcolor} 4,\only<5-6>{\color{orange}} 5, \only<5>{\normalcolor} 6\normalcolor \}$
 \end{frame}
 
 \begin{frame}{Nicht konstante Grenze: Naiver Ansatz}
@@ -84,6 +89,20 @@
     \inputminted{c}{code_snippets/04-00-non-const-bound-loop-fixup.c}
   \end{center}
   $\hookrightarrow$ \texttt{length} $\in \{\only<2>{\color{green}} 1, 2, 3, \normalcolor 4,\only<2>{\color{green}} 5, 6\normalcolor \}$
+\end{frame}
+
+\begin{frame}{Problem}
+  \begin{center}
+    \inputminted{c}{code_snippets/04-02-non-const-bound-loop-fixup-unsigned.c}
+  \end{center}
+  $\hookrightarrow$ \texttt{length} $\in \{\only<3>{\color{red}} 1, 2,\only<2->{\color{green}} 3, \normalcolor 4,\only<2->{\color{green}} 5, 6\normalcolor \}$
+\end{frame}
+
+\begin{frame}{Lösung}
+  \begin{center}
+    \inputminted{c}{code_snippets/04-03-non-const-bound-loop-fixup-unsigned-fixed.c}
+  \end{center}
+  $\hookrightarrow$ \texttt{length} $\in \{\only<3>{\color{green}} 1, 2,\only<2->{\color{green}} 3, \normalcolor 4,\only<2->{\color{green}} 5, 6\normalcolor \}$
 \end{frame}
 
 \begin{frame}{Nicht konstante Grenze: Duff's device}
@@ -105,31 +124,28 @@
   \end{itemize}
 \end{frame}
 
+\begin{frame}{$c$ ist Streckung}
+  \begin{center}
+    \only<1> {
+      \inputminted{c}{code_snippets/10-05-stretch-01.c}
+    }
+    \only<2>{
+      \inputminted{c}{code_snippets/10-06-stretch-02.c}
+    }
+  \end{center}
+\end{frame}
+
 \begin{frame}{Allgemeine Schleife in FIRM}
   \begin{center}
     \input{fig/base_loop.tex}
   \end{center}
 \end{frame}
 
-\begin{frame}{Allgemeiner loop fixup}
-  \begin{center}
-    \inputminted{c}{code_snippets/11-00-general-loop-fixup.c}
-  \end{center}
-\end{frame}
-
-\begin{frame}{Problem}
-  \begin{center}
-    \inputminted{c}{code_snippets/12-00-non-const-bound-loop-fixup-unsigned.c}
-  \end{center}
-  $\hookrightarrow$ \texttt{length} $\in \{\only<2>{\color{red}} 1, 2,\only<2>{\color{green}} 3, \normalcolor 4,\only<2>{\color{green}} 5, 6\normalcolor \}$
-\end{frame}
-
-\begin{frame}{Lösung}
+\begin{frame}{Allgmeiner loop fixup}
   \begin{center}
     \inputminted{c}{code_snippets/13-00-general-loop-fixup-preheader.c}
   \end{center}
   $c \in \lbrack \frac{t_{min}}{f + 1}, \frac{t_{max}}{f + 1} \rbrack$\\
-  $\hookrightarrow$ \texttt{length} $\in \{\only<2>{\color{green}} 1, 2, 3, \normalcolor 4,\only<2>{\color{green}} 5, 6\normalcolor \}$
 \end{frame}
 
 \begin{frame}{Allgemeiner loop fixup in FIRM}
@@ -172,10 +188,11 @@
       1024 & 100.24\% & 100.35\%\\
     \end{tabular}
     \vspace{12pt}
+    \\
     Vergleich zur Referenz ohne Schleifenausrollen
     \vspace{12pt}
 
-    Ausreißer: \texttt{h264ref}
+    Ausrei\ss{}er: \texttt{h264ref}
   \end{center}
 \end{frame}
 
@@ -186,7 +203,7 @@
     \item Doppelt so viele Schleifen ausgerollt
     \item Kein Performancegewinn\pause
     \item >2.5 KLOC
-    \item ca. 10 Beweise nötig
+    \item ca. 5 Beweise nötig
   \end{itemize}
 \end{frame}
 
@@ -194,6 +211,8 @@
   \begin{itemize}
     \item Nicht konstante Grenze ausrollbar
     \item Grenze invariant, Inkrement konstant
+    \item Spekulativ ausrollen
+    \item Weniger oder gleich viele Ausführungen
     \item Fixup code entweder loop oder duff's
     \item Preheader für Randfälle
   \end{itemize}
