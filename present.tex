@@ -119,7 +119,7 @@
   \begin{itemize}
     \item $f$ Ausrollfaktor
     \item $N$ Scheilfen invariant
-    \item $c \in \lbrack \frac{t_{min}}{f + 1}, \frac{t_{max}}{f + 1} \rbrack, c \neq 0$
+    \item $c \in \lbrack \frac{t_{min}}{f}, \frac{t_{max}}{f} \rbrack, c \neq 0$
     \item $cmp \in \{<,\leq,>,\geq\}$
   \end{itemize}
 \end{frame}
@@ -145,7 +145,7 @@
   \begin{center}
     \inputminted{c}{code_snippets/13-00-general-loop-fixup-preheader.c}
   \end{center}
-  $c \in \lbrack \frac{t_{min}}{f + 1}, \frac{t_{max}}{f + 1} \rbrack$\\
+  $c \in \lbrack \frac{t_{min}}{f}, \frac{t_{max}}{f} \rbrack$\\
 \end{frame}
 
 \begin{frame}{Allgemeiner Loop fixup in FIRM}
@@ -165,7 +165,7 @@
       \inputminted{c}{code_snippets/14-00-general-duff-fixup.c}
     \end{center}
     \begin{itemize}
-      \item $c \in \lbrack \frac{t_{min}}{f + 1}, \frac{t_{max}}{f + 1} \rbrack$
+      \item $c \in \lbrack \frac{t_{min}}{f}, \frac{t_{max}}{f} \rbrack$
     \end{itemize}
   }
 \end{frame}
