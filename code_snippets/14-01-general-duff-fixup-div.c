@@ -4,13 +4,13 @@ if(!overflows(N - c * (f - 1))) {
         foo(); i += c; // f times
     }
 }
-switch (N - i + (c -/+ 1)) {
-    case (c * f) .. (c * (f + 1)):
+switch ((N - i + (c -/+ 1)) / c) {
+    case f .. (f + 1):
         foo(); i += c;
-    case (c * (f - 1)) .. (c * f):
+    case (f - 1) .. f:
         foo(); i += c;
     // ...
-    case (c * 1) .. (c * 2):
+    case 1 .. 2:
         foo(); i += c;
 }
 
