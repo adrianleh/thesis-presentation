@@ -3,7 +3,10 @@
     \node at (-1, 0.5) [square, draw] (PH) {PH};
     \node at (0, -1) [square, draw] (H) {$\hat{\text{H}}$};
     \node at (1.25, -2) [square, draw] (B) {B\textsubscript{0}};
-    \node at (3, -2) [square, draw] (BDup) {B\textsubscript{1}};
+    \node at (3, -2) [square, draw] (BDup1) {B\textsubscript{1}};
+    \node at (4.75, -2) [square, draw] (BDup2) {B\textsubscript{2}};
+    \node at (6.5, -2) [square, draw] (BDup3) {B\textsubscript{3}};
+
     \node at (0, -3.75) [square, draw] (H1) {H};
     \node at (1, -4.75) [square, draw] (B1) {B};
     \node at (0, -5.25) (post) {$\bot$};
@@ -15,11 +18,14 @@
     (post) edge node [right] {} (H1)
 
     (B) edge node [right] {} (H)
-    (BDup) edge node [right] {} (B)
+    (BDup1) edge node [right] {} (B)
+    (BDup2) edge node [right] {} (BDup1)
+    (BDup3) edge node [right] {} (BDup2)
+
     (B1) edge node [right] {} (H1);
 
 
-    \draw[rounded corners=3pt, <-] (BDup.south) -- (3,-2.75) -- (3.75,-2.75) -- (3.75,-0.25) -- (0, -0.25) -- (H.north);
+    \draw[rounded corners=3pt, <-] (BDup3.south) -- (6.5,-2.75) -- (7.25,-2.75) -- (7.25,-0.25) -- (0, -0.25) -- (H.north);
     \draw[rounded corners=3pt, <-] (B1.south) -- (1,-5.5) -- (1.75,-5.5) -- (1.75,-3) -- (0, -3) -- (H1.north);
     \draw[rounded corners=3pt, ->] (H1.west) -- (-1,-3.75) -- (PH.south);
 \end{tikzpicture}
