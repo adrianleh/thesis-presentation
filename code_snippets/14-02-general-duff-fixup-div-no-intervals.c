@@ -6,10 +6,10 @@ if(!overflows(N - c * (f - 1))) {
     }
 }
 switch ((N - i + (c -/+ 1)) / c) {
-    case (f - 1) .. f:
+    case (f - 1):
         foo(); i += c;
     // ...
-    case 1 .. 2:
+    case 1:
         foo(); i += c;
 }
 

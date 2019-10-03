@@ -74,42 +74,42 @@
   \begin{center}
     \inputminted{c}{code_snippets/02-01-non-const-bound-unrolled.c}
   \end{center}
-  $\hookrightarrow$ \texttt{length} $\in \{\only<2->{\color{red}} 1, \only<2>{\normalcolor} 2, \only<2-3>{\normalcolor} 3, \only<4->{\normalcolor} 4,\only<5-6>{\color{red}} 5, \only<5>{\normalcolor} 6\normalcolor \}$
+  $\hookrightarrow$ \texttt{length} $\in \{\only<2->{\color{red}} 1, \only<2>{\normalcolor} 2, \only<2-3>{\normalcolor} 3, \only<4->{\normalcolor} 4, \only<5-6>{\color{red}} 5, \only<5>{\normalcolor} 6\normalcolor \}$
 \end{frame}
 
 \begin{frame}{Ausrollen: Nicht konstante Grenze}
   \begin{center}
     \inputminted{c}{code_snippets/03-00-non-const-bound-unrolled-less.c}
   \end{center}
-  $\hookrightarrow$ \texttt{length} $\in \{\only<2->{\color{orange}} 1, \only<2>{\normalcolor} 2, \only<2-3>{\normalcolor} 3, \only<4->{\normalcolor} 4,\only<5-6>{\color{orange}} 5, \only<5>{\normalcolor} 6\normalcolor \}$
+  $\hookrightarrow$ \texttt{length} $\in \{\only<2->{\color{blue}} 1, \only<2>{\normalcolor} 2, \only<2-3>{\normalcolor} 3, \only<4->{\normalcolor} 4,\only<5-6>{\color{blue}} 5, \only<5>{\normalcolor} 6\normalcolor \}$
 \end{frame}
 
 \begin{frame}{Nicht konstante Grenze: Naiver Ansatz}
   \begin{center}
     \inputminted{c}{code_snippets/04-00-non-const-bound-loop-fixup.c}
   \end{center}
-  $\hookrightarrow$ \texttt{length} $\in \{\only<2>{\color{green}} 1, 2, 3, \normalcolor 4,\only<2>{\color{green}} 5, 6\normalcolor \}$
+  $\hookrightarrow$ \texttt{length} $\in \{\only<2>{\color{green}} 1, 2, 3, 4, 5, 6\normalcolor \}$
 \end{frame}
 
 \begin{frame}{Problem}
   \begin{center}
     \inputminted{c}{code_snippets/04-02-non-const-bound-loop-fixup-unsigned.c}
   \end{center}
-  $\hookrightarrow$ \texttt{length} $\in \{\only<3>{\color{red}} 1, 2,\only<2->{\color{green}} 3, \normalcolor 4,\only<2->{\color{green}} 5, 6\normalcolor \}$
+  $\hookrightarrow$ \texttt{length} $\in \{\only<3>{\color{red}} 1, 2,\only<2->{\color{green}} 3, 4, 5, 6\normalcolor \}$
 \end{frame}
 
 \begin{frame}{Lösung}
   \begin{center}
     \inputminted{c}{code_snippets/04-03-non-const-bound-loop-fixup-unsigned-fixed.c}
   \end{center}
-  $\hookrightarrow$ \texttt{length} $\in \{\only<3>{\color{green}} 1, 2,\only<2->{\color{green}} 3, \normalcolor 4,\only<2->{\color{green}} 5, 6\normalcolor \}$
+  $\hookrightarrow$ \texttt{length} $\in \{\only<3>{\color{green}} 1, 2,\only<2->{\color{green}} 3, 4, 5, 6\normalcolor \}$
 \end{frame}
 
 \begin{frame}{Nicht konstante Grenze: Duff's Device}
   \begin{center}
     \inputminted{c}{code_snippets/04-01-non-const-bound-duff-fixup.c}
   \end{center}
-  $\hookrightarrow$ \texttt{length} $\in \{\only<2>{\color{green}} 1, 2, 3, \normalcolor 4,\only<2>{\color{green}} 5, 6\normalcolor \}$
+  $\hookrightarrow$ \texttt{length} $\in \{\only<2>{\color{green}} 1, 2, 3, 4, 5, 6\normalcolor \}$
 \end{frame}
 
 \begin{frame}{Nicht konstante Grenze: Allgemeine Schleife}
@@ -118,7 +118,7 @@
   \end{center}
   \begin{itemize}
     \item $f$ Ausrollfaktor
-    \item $N$ Scheilfen invariant
+    \item $N$ Schleifeninvariant
     \item $c \in \lbrack \frac{t_{min}}{f}, \frac{t_{max}}{f} \rbrack, c \neq 0$
     \item $cmp \in \{<,\leq,>,\geq\}$
   \end{itemize}
@@ -141,7 +141,7 @@
   \end{center}
 \end{frame}
 
-\begin{frame}{Allgmeiner Loop fixup}
+\begin{frame}{Allgemeiner Loop fixup}
   \begin{center}
     \inputminted{c}{code_snippets/13-00-general-loop-fixup-preheader.c}
   \end{center}
@@ -157,10 +157,15 @@
 \begin{frame}{Allgemeiner Duff's Device fixup}
   \only<1>{
     \begin{center}
+      \inputminted{c}{code_snippets/14-02-general-duff-fixup-div-no-intervals.c}
+    \end{center}
+  }
+  \only<2>{
+    \begin{center}
       \inputminted{c}{code_snippets/14-01-general-duff-fixup-div.c}
     \end{center}
   }
-  \only<2> {
+  \only<3> {
     \begin{center}
       \inputminted{c}{code_snippets/14-00-general-duff-fixup.c}
     \end{center}
@@ -177,12 +182,6 @@
 \end{frame}
 
 \begin{frame}{Benchmarks}
-  %\begin{tabular}{l|rrrrrr}
-   % Maximum size & 32 & 64  & 128 & 256 & 512 & 1024\\
-    %\toprule
-    %\textbf{Loop fixup} & 99.44\% & 99.47\% & 100.00\% & 100.32\% & 99.99\% & 100.24\%\\
-    %\textbf{Duff's Device fixup} & 99.79\% & 100.12\% & 100.27\% & 99.53\% & 99.47\% & 100.35\%\\
-  %\end{tabular}
   \begin{center}
     \begin{tabular}{l|rr}
       Maximum size & Loop fixup & Duff's Device fixup\\
@@ -199,7 +198,7 @@
     Vergleich zur Referenz ohne Schleifenausrollen
     \vspace{12pt}
 
-    Ausrei\ss{}er: \texttt{h264ref}
+    Ausrei\ss{}er: \texttt{h264ref} (ca. 5\% Performancegewinn)
   \end{center}
 \end{frame}
 
@@ -207,7 +206,7 @@
   \begin{itemize}
     \item LCSSA hilfreich
     \item BA Aebi, gute Grundlage\pause
-    \item Doppelt so viele Schleifen ausgerollt
+    \item Doppelt so viele Schleifen ausgerollt ($4.17\% \rightarrow 9.41\% (+5.24\%)$)
     \item Kein Performancegewinn\pause
     \item >2.5 KLOC
     \item ca. 5 Beweise nötig
